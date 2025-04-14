@@ -20,7 +20,7 @@ export default function Project() {
                      from-primary via-secondary to-tertiary bg-clip-text text-transparent mb-4">
                         My Works
                     </h2>
-                    <p className="text-gray-400">Projects I've worked on</p>
+                    <p className="text-gray-400">Projects I&apos;ve worked on</p>
 
                 </motion.div>
                 {/* Project Grid */}

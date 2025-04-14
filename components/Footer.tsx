@@ -9,7 +9,7 @@ export default function Footer() {
                  from-primary via-secondary to-tertiary bg-clip-text text-transparent mt-12 mb-4">
                     Get in Touch
                 </h2>
-                <p className="text-gray-400 text-center mb-12">Let's connect and discuss your next project</p>
+                <p className="text-gray-400 text-center mb-12">Let&apos;s connect and discuss your next project</p>
                 <div className="mb-16">
                     <ContactForm />
                 </div>
