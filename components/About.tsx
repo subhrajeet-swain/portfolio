@@ -68,16 +68,16 @@ export default function About() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 1.2 }}
                                 whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                                className="relative overflow-hidden px-8 py-4 rounded-full bg-surface border
-                                        border-white/10 hover:border-primary/30 transition-all group"
+                                className="group/explore relative overflow-hidden px-8 py-4 rounded-full bg-surface border
+                                        border-white/10 hover:border-primary/30 transition-all"
                             >
-                                <span className="text-content group-hover:text-primary transition-colors">
+                                <span className="text-content group-hover/explore:text-primary transition-colors">
                                     Explore Work
                                 </span>
                                 <div
                                     className="absolute inset-0 bg-gradient-to-r 
                                                 from-primary/10 to-tertiary/10 opacity-0
-                                                group-hover:opacity-100 transition-opacity"
+                                                group-hover/explore:opacity-100 transition-opacity"
                                 />
                             </motion.button>
 
@@ -88,16 +88,16 @@ export default function About() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 1.3 }}
                                 whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                                className="relative overflow-hidden px-8 py-4 rounded-full bg-surface border
-                                        border-white/10 hover:border-primary/30 transition-all group inline-flex items-center"
+                                className="group/cv relative overflow-hidden px-8 py-4 rounded-full bg-surface border
+                                        border-white/10 hover:border-primary/30 transition-all"
                             >
-                                <span className="text-content group-hover:text-primary transition-colors">
+                                <span className="text-content group-hover/cv:text-primary transition-colors">
                                     Download CV
                                 </span>
                                 <div
                                     className="absolute inset-0 bg-gradient-to-r 
                                                 from-primary/10 to-tertiary/10 opacity-0
-                                                group-hover:opacity-100 transition-opacity"
+                                                group-hover/cv:opacity-100 transition-opacity"
                                 />
                             </motion.a>
                         </div>
