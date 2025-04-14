@@ -10,22 +10,22 @@ export default function About() {
     return (
         <section id="about" className="min-h-screen relative overflow-hidden bg-black">
             <ParticleCanvas />
-            <div className="max-w-7xl mx-auto px-6 pt-32">
-                <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-32">
+                <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
                     {/* Text content */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, ease: 'easeOut' }}
-                        className="relative group lg:w-1/2"
+                        className="relative group lg:w-1/2 text-center lg:text-left"
                     >
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.5 }}
-                            className="text-6xl md:text-8xl font-bold bg-gradient-to-r
+                            className="text-5xl sm:text-6xl md:text-8xl font-bold bg-gradient-to-r
                                     from-primary via-secondary to-tertiary 
-                                    bg-clip-text text-transparent mb-6"
+                                    bg-clip-text text-transparent mb-4 sm:mb-6"
                         >
 
                             Full Stack
@@ -48,7 +48,7 @@ export default function About() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 1.1 }}
-                            className="text-xl text-content/80 mb-8"
+                            className="text-lg sm:text-xl text-content/80 mb-6 sm:mb-8"
                         >
 
                             Speciliazing in React, Node.js, and Cloud Architecture.
@@ -56,7 +56,7 @@ export default function About() {
 
                         </motion.p>
 
-                        <div className="flex gap-4">
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                             <motion.button
                                 onClick={() => {
                                     const section = document.getElementById("projects");
@@ -68,8 +68,8 @@ export default function About() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 1.2 }}
                                 whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                                className="group/explore relative overflow-hidden px-8 py-4 rounded-full bg-surface border
-                                        border-white/10 hover:border-primary/30 transition-all"
+                                className="group/explore relative overflow-hidden px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-surface border
+                                        border-white/10 hover:border-primary/30 transition-all w-full sm:w-auto"
                             >
                                 <span className="text-content group-hover/explore:text-primary transition-colors">
                                     Explore Work
@@ -88,8 +88,8 @@ export default function About() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 1.3 }}
                                 whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                                className="group/cv relative overflow-hidden px-8 py-4 rounded-full bg-surface border
-                                        border-white/10 hover:border-primary/30 transition-all"
+                                className="group/cv relative overflow-hidden px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-surface border
+                                        border-white/10 hover:border-primary/30 transition-all w-full sm:w-auto"
                             >
                                 <span className="text-content group-hover/cv:text-primary transition-colors">
                                     Download CV
@@ -108,7 +108,7 @@ export default function About() {
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-                        className="w-full lg:w-1/2 relative px-4 sm:px-6 mt-8 lg:mt-0"
+                        className="w-full lg:w-1/2 relative px-4 sm:px-6"
                         style={{ y }}
                     >
                         <div className="relative w-full max-w-[400px] mx-auto aspect-square group">
