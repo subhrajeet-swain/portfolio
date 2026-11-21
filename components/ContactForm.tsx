@@ -1,11 +1,6 @@
 'use client';
 import { useState } from 'react';
 
-const field =
-    'mt-2 block w-full border-0 border-b border-rule bg-transparent px-0 py-2 text-lg text-ink ' +
-    'placeholder:text-muted focus:border-accent focus:outline-none focus:ring-0';
-const label = 'font-mono text-xs uppercase tracking-[0.14em] text-muted';
-
 export default function ContactForm() {
     const [formData, setFormData] = useState({
         name: '',
@@ -30,77 +25,79 @@ export default function ContactForm() {
             });
 
             if (!response.ok) {
-                const { error } = await response.json().catch(() => ({ error: null }));
-                throw new Error(error || 'Failed to send message. Please try again.');
+                throw new Error('Failed to send message');
             }
 
             setFormData({ name: '', email: '', message: '' });
             setStatus({ loading: false, error: null, success: true });
         } catch (error) {
+            console.error('Error sending message:', error);
             setStatus({
                 loading: false,
-                error: (error as Error).message,
+                error: 'Failed to send message. Please try again.',
                 success: false
             });
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="mt-10 max-w-[42rem] space-y-8">
-            <div className="grid gap-8 sm:grid-cols-2">
-                <div>
-                    <label htmlFor="name" className={label}>Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        required
-                        maxLength={100}
-                        autoComplete="name"
-                        value={formData.name}
-                        onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                        className={field}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email" className={label}>Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        required
-                        maxLength={200}
-                        autoComplete="email"
-                        value={formData.email}
-                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                        className={field}
-                    />
-                </div>
+        <form onSubmit={handleSubmit} className="space-y-6 max-w-xl mx-auto">
+            <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300">
+                    Name
+                </label>
+                <input
+                    type="text"
+                    id="name"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                    className="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 
+                    text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
             </div>
             <div>
-                <label htmlFor="message" className={label}>Message</label>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                    Email
+                </label>
+                <input
+                    type="email"
+                    id="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                    className="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 
+                    text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+            </div>
+            <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-300">
+                    Message
+                </label>
                 <textarea
                     id="message"
                     required
-                    rows={5}
-                    maxLength={5000}
+                    rows={4}
                     value={formData.message}
                     onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                    className={`${field} resize-y`}
+                    className="mt-1 block w-full rounded-md bg-gray-800 border border-gray-700 
+                    text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>
-            <div className="flex flex-wrap items-center gap-6">
-                <button
-                    type="submit"
-                    disabled={status.loading}
-                    className="border border-ink px-6 py-2.5 font-mono text-sm transition-colors
-                    hover:border-accent hover:bg-accent hover:text-paper disabled:opacity-50"
-                >
-                    {status.loading ? 'Sending…' : 'Send message'}
-                </button>
-                <p role="status" className="font-mono text-sm">
-                    {status.error && <span className="text-accent">{status.error}</span>}
-                    {status.success && <span className="text-muted">Sent. I&apos;ll reply by email.</span>}
-                </p>
-            </div>
+            <button
+                type="submit"
+                disabled={status.loading}
+                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md 
+                hover:bg-blue-700 transition-colors disabled:opacity-50"
+            >
+                {status.loading ? 'Sending...' : 'Send Message'}
+            </button>
+            {status.error && (
+                <p className="text-red-500 text-sm text-center">{status.error}</p>
+            )}
+            {status.success && (
+                <p className="text-green-500 text-sm text-center">Message sent successfully!</p>
+            )}
         </form>
     );
 }
