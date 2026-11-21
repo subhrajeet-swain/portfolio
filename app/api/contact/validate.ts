@@ -21,6 +21,6 @@ export function validate(body: unknown): ContactMessage | string {
         if (v.length > LIMITS[key]) return `Your ${key} is too long.`;
         out[key] = v;
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(out.email)) return 'That email address looks wrong.';
+    if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+$/.test(out.email)) return 'That email address looks wrong.';
     return out;
 }

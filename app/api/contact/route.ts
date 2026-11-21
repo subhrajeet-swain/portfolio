@@ -3,6 +3,14 @@ import { NextResponse } from 'next/server';
 import { escapeHtml, validate } from './validate';
 
 export async function POST(request: Request) {
+    // JSON-only blocks cross-site <form> posts (they can't send application/json without a preflight).
+    if (!request.headers.get('content-type')?.startsWith('application/json')) {
+        return NextResponse.json({ error: 'Unsupported content type' }, { status: 415 });
+    }
+    if (Number(request.headers.get('content-length') ?? 0) > 10_000) {
+        return NextResponse.json({ error: 'Message is too long.' }, { status: 413 });
+    }
+
     const input = validate(await request.json().catch(() => null));
     if (typeof input === 'string') {
         return NextResponse.json({ error: input }, { status: 400 });

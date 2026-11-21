@@ -12,6 +12,7 @@ test('validates input', () => {
     assert.equal(typeof validate(null), 'string');
     assert.equal(typeof validate({ name: 'A', email: 'a@b.co', message: '   ' }), 'string');
     assert.equal(typeof validate({ name: 'A', email: 'not-an-email', message: 'hi' }), 'string');
+    assert.equal(typeof validate({ name: 'A', email: 'a@b.co,c@d.co', message: 'hi' }), 'string');
     assert.equal(typeof validate({ name: 'A', email: 'a@b.co', message: 'x'.repeat(5001) }), 'string');
     assert.equal(typeof validate({ name: ['A'], email: 'a@b.co', message: 'hi' }), 'string');
 });
