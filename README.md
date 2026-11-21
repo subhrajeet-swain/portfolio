@@ -7,7 +7,7 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
-All page copy lives in `content.ts`. The résumé served at `/subhrajeet-resume.pdf` is in `public/`.
+Projects, skills, experience and social links live in `components/constants/index.tsx`. The résumé served at `/subhrajeet-resume.pdf` is in `public/`.
 
 The contact form posts to `app/api/contact` and sends mail through Resend. It needs these env vars:
 
