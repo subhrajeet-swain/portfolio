@@ -20,7 +20,7 @@ export const useCanvas = (draw: DrawFunction) => {
       canvas.height = window.innerHeight * devicePixelRatio;
       canvas.style.width = window.innerWidth + 'px';
       canvas.style.height = window.innerHeight + 'px';
-      ctx.scale(devicePixelRatio, devicePixelRatio);
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
     };
 
     const init = () => {

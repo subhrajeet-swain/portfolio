@@ -1,8 +1,9 @@
 'use client';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MenuItem from './MenuItems';
 import { GithubIcon, LinkedInIcon } from './SocialIcons';
+import { socialLinks } from './constants';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navItems = [
@@ -13,15 +14,24 @@ const navItems = [
   { name: 'Contact', href: '#contact' },
 ];
 
-const socialLinks = {
-  github: "https://github.com/subhrajeet-swain",
-  linkedin: "https://www.linkedin.com/in/subhrajeet-swain-2869a2250",
-};
-
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [active, setActive] = useState('#about');
   const { scrollY } = useScroll();
+
+  // Highlight the section that crosses the middle of the viewport.
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(`#${e.target.id}`)),
+      { rootMargin: '-50% 0px -50% 0px' }
+    );
+    navItems.forEach((item) => {
+      const el = document.querySelector(item.href);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setIsScrolled(latest > 50);
@@ -39,7 +49,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-3">
         <div className="flex items-center justify-between">
           {/* Logo Section */}
-          <motion.div
+          <motion.a
+            href="#about"
             whileHover={{ scale: 1.05 }}
             className="flex items-center gap-2 group"
           >
@@ -55,14 +66,14 @@ export default function Navbar() {
             <span className="font-semibold text-content/90 group-hover:text-primary transition-colors">
               Subhrajeet Swain
             </span>
-          </motion.div>
+          </motion.a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             <div className="flex items-center gap-6 bg-background/80 px-4 py-2 
             rounded-full border border-white/5 shadow-lg shadow-primary/5">
               {navItems.map((item, i) => (
-                <MenuItem key={item.name} index={i} href={item.href}>
+                <MenuItem key={item.name} index={i} href={item.href} active={active === item.href}>
                   {item.name}
                 </MenuItem>
               ))}
@@ -73,6 +84,7 @@ export default function Navbar() {
             <div className="flex gap-3">
               <a
                 href={socialLinks.github}
+                aria-label="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/5 hover:bg-primary/10 transition-colors group"
@@ -81,6 +93,7 @@ export default function Navbar() {
               </a>
               <a
                 href={socialLinks.linkedin}
+                aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/5 hover:bg-primary/10 transition-colors group"
@@ -93,6 +106,8 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMenuOpen}
             className="md:hidden p-2 rounded-lg bg-white/5 hover:bg-primary/10 transition-colors"
           >
             {isMenuOpen ? (
@@ -115,6 +130,7 @@ export default function Navbar() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
+                aria-current={active === item.href ? 'location' : undefined}
                 className="block px-4 py-2 text-content/80 hover:text-primary hover:bg-white/5 
                 rounded-lg transition-colors"
               >
@@ -124,6 +140,7 @@ export default function Navbar() {
             <div className="pt-4 border-t border-white/5 flex gap-4">
               <a
                 href={socialLinks.github}
+                aria-label="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/5 hover:bg-primary/10 transition-colors group"
@@ -132,6 +149,7 @@ export default function Navbar() {
               </a>
               <a
                 href={socialLinks.linkedin}
+                aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/5 hover:bg-primary/10 transition-colors group"
