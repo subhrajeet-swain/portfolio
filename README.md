@@ -1,17 +1,20 @@
-1️⃣ **Clone this repository:**
-```bash
-git clone https://github.com/subhrajeet-swain/portfolio.git
-```
+# subhrajeet-swain/portfolio
 
-2️⃣ **Install dependencies:**
+Personal site. Next.js 16, Tailwind 3, deployed on Vercel.
+
 ```bash
-cd my-portfolio
 npm install
+npm run dev        # http://localhost:3000
 ```
 
-3️⃣ **Start the development server:**
-```bash
-npm run dev
+All page copy lives in `content.ts`. The résumé served at `/subhrajeet-resume.pdf` is in `public/`.
+
+The contact form posts to `app/api/contact` and sends mail through Resend. It needs these env vars:
+
+```
+RESEND_API_KEY=
+FROM_EMAIL=        # a sender on your verified Resend domain
+TO_EMAIL=          # where messages land
 ```
 
-4️⃣ **Open [http://localhost:3000](http://localhost:3000) in your browser! 🎉**
+Input validation test: `node --experimental-strip-types --test app/api/contact/validate.test.ts`
