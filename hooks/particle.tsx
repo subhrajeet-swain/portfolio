@@ -11,8 +11,8 @@ class Particle {
   color: string;
 
   constructor(ctx: CanvasRenderingContext2D) {
-    this.x = Math.random() * ctx.canvas.width;
-    this.y = Math.random() * ctx.canvas.height;
+    this.x = Math.random() * ctx.canvas.clientWidth;
+    this.y = Math.random() * ctx.canvas.clientHeight;
     this.velocity = {
       x: (Math.random() - 0.5) * 2,
       y: (Math.random() - 0.5) * 2
@@ -27,8 +27,8 @@ class Particle {
     this.x += this.velocity.x;
     this.y += this.velocity.y;
 
-    if (this.x < 0 || this.x > ctx.canvas.width) this.velocity.x *= -1;
-    if (this.y < 0 || this.y > ctx.canvas.height) this.velocity.y *= -1;
+    if (this.x < 0 || this.x > ctx.canvas.clientWidth) this.velocity.x *= -1;
+    if (this.y < 0 || this.y > ctx.canvas.clientHeight) this.velocity.y *= -1;
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -50,7 +50,7 @@ export function ParticleCanvas() {
 
     // Clear canvas with trail effect
     ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillRect(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
 
     // Update and draw particles
     particles.current.forEach(particle => {

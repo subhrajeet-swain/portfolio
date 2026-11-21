@@ -8,14 +8,13 @@ import Experience from "@/components/Experience";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-900">
+    <main className="min-h-screen bg-background">
       <Navbar />
       <About />
       <Skills />
       <Project />
       <Experience />
       <Footer />
-
-    </div>
+    </main>
   );
 }
